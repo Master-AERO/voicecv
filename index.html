@@ -6,7 +6,6 @@
 <title>HiredCV — A CV Tailored to the Role</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   :root {
     --green: #0A7C4E;
@@ -446,22 +445,31 @@ function renderCV(html) {
 }
 
 function downloadCV() {
-  const wrapper = document.createElement('div');
-  wrapper.style.cssText = 'padding:20px;font-family:Arial,Helvetica,sans-serif;color:#000;background:#fff;max-width:700px;';
-  wrapper.innerHTML = state.cvText;
-  const filename = (state.userName || 'CV').replace(/\s+/g, '-') + '-CV.pdf';
-  showToast('Preparing PDF...');
-  html2pdf().set({
-    margin: 12,
-    filename: filename,
-    image: { type: 'jpeg', quality: 0.98 },
-    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
-    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-  }).from(wrapper).save().then(() => {
-    showToast('PDF downloaded!');
-  }).catch(() => {
-    showToast('Could not generate PDF. Try again.');
-  });
+  const title = (state.userName || 'CV').replace(/[<>]/g, '') + ' — CV';
+  const printHtml = '<!DOCTYPE html><html lang="en"><head>' +
+    '<meta charset="UTF-8">' +
+    '<title>' + title + '</title>' +
+    '<style>' +
+    '@page { size: A4; margin: 15mm; }' +
+    'html, body { margin: 0; padding: 0; background: #fff; }' +
+    'body { font-family: Arial, Helvetica, sans-serif; color: #000; font-size: 11pt; line-height: 1.5; }' +
+    '* { color: #000 !important; background: transparent !important; border-color: #000 !important; }' +
+    'h1, h2, h3, h4 { font-family: Arial, Helvetica, sans-serif; }' +
+    '@media print { body { -webkit-print-color-adjust: exact; print-color-adjust: exact; } }' +
+    '</style></head><body>' +
+    state.cvText +
+    '<scr' + 'ipt>window.addEventListener("load", function(){ setTimeout(function(){ window.print(); }, 250); });</scr' + 'ipt>' +
+    '</body></html>';
+
+  const w = window.open('', '_blank');
+  if (!w) {
+    showToast('Please allow pop-ups, then try downloading again.');
+    return;
+  }
+  w.document.open();
+  w.document.write(printHtml);
+  w.document.close();
+  showToast('Choose "Save as PDF" in the print dialog.');
 }
 
 function shareWhatsApp() {
