@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VoiceCV — Speak Your Experience</title>
+<title>HiredCV — A CV Tailored to the Role</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 <style>
@@ -34,7 +34,6 @@
   }
   h1,h2,h3,h4 { font-family: 'Syne', sans-serif; }
 
-  /* NAV */
   nav {
     background: var(--white);
     border-bottom: 1px solid var(--border);
@@ -48,7 +47,6 @@
   .logo span { color: var(--green-mid); }
   .nav-badge { font-size: 12px; background: var(--green-light); color: var(--green); padding: 4px 10px; border-radius: 20px; font-weight: 500; }
 
-  /* HERO */
   .hero {
     background: var(--white);
     border-bottom: 1px solid var(--border);
@@ -66,10 +64,8 @@
   }
   .pill.active, .pill:hover { background: var(--green-light); color: var(--green); border-color: var(--green-mid); }
 
-  /* MAIN LAYOUT */
   .app { max-width: 860px; margin: 0 auto; padding: 2rem 1rem; }
 
-  /* STEP INDICATOR */
   .steps {
     display: flex; align-items: center; gap: 0; margin-bottom: 2rem;
     background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
@@ -87,7 +83,6 @@
   .step-label.active { color: var(--ink); font-weight: 500; }
   .step-divider { flex: 1; min-width: 20px; height: 1px; background: var(--border); margin: 0 8px; }
 
-  /* CARDS */
   .card {
     background: var(--white); border: 1px solid var(--border);
     border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.25rem;
@@ -95,7 +90,6 @@
   .card-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; margin-bottom: 0.25rem; color: var(--ink); }
   .card-sub { font-size: 13px; color: var(--muted); margin-bottom: 1.25rem; }
 
-  /* FORM ELEMENTS */
   input[type="text"], select, textarea {
     width: 100%; padding: 10px 14px; border: 1px solid var(--border);
     border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
@@ -103,11 +97,10 @@
     transition: border-color 0.15s;
   }
   input[type="text"]:focus, select:focus, textarea:focus { border-color: var(--green-mid); }
-  textarea { resize: vertical; min-height: 100px; }
+  textarea { resize: vertical; min-height: 100px; line-height: 1.6; }
   label { font-size: 13px; font-weight: 500; color: var(--ink-2); display: block; margin-bottom: 6px; }
   .field { margin-bottom: 1rem; }
 
-  /* BUTTONS */
   .btn {
     display: inline-flex; align-items: center; gap: 8px;
     padding: 10px 20px; border-radius: var(--radius-sm); font-family: 'DM Sans', sans-serif;
@@ -117,52 +110,14 @@
   .btn-primary:hover { background: var(--green-dark); }
   .btn-secondary { background: var(--white); color: var(--ink); border-color: var(--border); }
   .btn-secondary:hover { background: var(--surface); }
-  .btn-danger { background: var(--red-light); color: var(--red); border-color: #FECACA; }
-  .btn-amber { background: var(--amber-light); color: var(--amber); border-color: #FDE68A; }
   .btn:disabled { opacity: 0.45; cursor: not-allowed; }
   .btn-full { width: 100%; justify-content: center; padding: 12px 20px; font-size: 15px; }
 
-  /* RECORD BUTTON */
-  .record-area { text-align: center; padding: 1.5rem 0; }
-  .record-btn {
-    width: 80px; height: 80px; border-radius: 50%; border: none; cursor: pointer;
-    background: var(--green-light); border: 3px solid var(--green-mid);
-    display: inline-flex; align-items: center; justify-content: center;
-    transition: all 0.2s; margin-bottom: 1rem;
-  }
-  .record-btn:hover { background: var(--green-mid); }
-  .record-btn:hover svg { stroke: white; }
-  .record-btn.recording { background: var(--red-light); border-color: var(--red); animation: pulse 1.2s infinite; }
-  .record-btn.recording svg { stroke: var(--red); }
-  @keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.06)} }
-  .record-status { font-size: 13px; color: var(--muted); }
-  .record-status.active { color: var(--red); font-weight: 500; }
-  .timer { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; color: var(--ink); margin: 0.5rem 0; }
-
-  /* TRANSCRIPT BOX */
-  .transcript-box {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-sm);
-    padding: 12px 14px; font-size: 13px; color: var(--ink-2); line-height: 1.6;
-    min-height: 60px; margin-top: 1rem; font-style: italic;
-  }
-
-  /* CV OUTPUT */
   .cv-output {
     background: var(--white); border: 1px solid var(--border); border-radius: var(--radius);
     padding: 2rem; font-size: 13.5px; line-height: 1.7; color: var(--ink-2);
   }
-  .cv-name { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--ink); margin-bottom: 2px; }
-  .cv-role-tag { font-size: 13px; color: var(--green); font-weight: 500; margin-bottom: 12px; }
-  .cv-contact { font-size: 12px; color: var(--muted); margin-bottom: 1.2rem; border-bottom: 1px solid var(--border); padding-bottom: 1rem; }
-  .cv-section { margin-bottom: 1.2rem; }
-  .cv-section-title { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--green); border-bottom: 1px solid var(--green-light); padding-bottom: 4px; margin-bottom: 8px; }
-  .cv-item-title { font-weight: 500; font-size: 13.5px; color: var(--ink); }
-  .cv-item-sub { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-  .cv-item-desc { font-size: 13px; color: var(--ink-2); }
-  .cv-skill-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-  .cv-skill-tag { font-size: 11px; background: var(--green-light); color: var(--green-dark); padding: 3px 10px; border-radius: 20px; font-weight: 500; }
 
-  /* MOD COUNTER */
   .mod-counter {
     display: flex; align-items: center; gap: 10px; padding: 10px 14px;
     background: var(--surface); border-radius: var(--radius-sm); border: 1px solid var(--border);
@@ -173,7 +128,6 @@
   .mod-dot.used { background: var(--amber); }
   .mod-label { font-size: 12px; color: var(--muted); }
 
-  /* UPSELL */
   .upsell-card {
     background: var(--white); border: 2px solid var(--green-mid); border-radius: var(--radius);
     padding: 1.5rem; text-align: center;
@@ -185,13 +139,11 @@
   .upsell-features li { padding: 5px 0; display: flex; align-items: center; gap: 8px; }
   .upsell-features li::before { content: '✓'; color: var(--green); font-weight: 700; }
 
-  /* LOADING */
   .loading { text-align: center; padding: 2rem; }
   .spinner { width: 36px; height: 36px; border: 3px solid var(--green-light); border-top-color: var(--green-mid); border-radius: 50%; animation: spin 0.8s linear infinite; margin: 0 auto 1rem; }
   @keyframes spin { to { transform: rotate(360deg); } }
   .loading-text { font-size: 13px; color: var(--muted); }
 
-  /* TOAST */
   .toast {
     position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
     background: var(--ink); color: white; padding: 10px 20px; border-radius: 20px;
@@ -199,7 +151,6 @@
   }
   .toast.show { opacity: 1; }
 
-  /* PAYMENT MODAL */
   .modal-overlay {
     display: none; position: fixed; inset: 0; background: rgba(15,26,20,0.55);
     z-index: 100; align-items: center; justify-content: center; padding: 1rem;
@@ -219,9 +170,6 @@
   .flex-row { display: flex; gap: 10px; align-items: center; }
   .ml-auto { margin-left: auto; }
   .mt-1 { margin-top: 0.75rem; }
-  .text-muted { font-size: 13px; color: var(--muted); }
-  .text-green { color: var(--green); font-weight: 500; }
-  .text-center { text-align: center; }
 
   @media (max-width: 600px) {
     nav { padding: 0 1rem; }
@@ -234,23 +182,22 @@
 <body>
 
 <nav>
-  <div class="logo">Voice<span>CV</span></div>
+  <div class="logo">Hired<span>CV</span></div>
   <div class="nav-badge">Beta</div>
 </nav>
 
 <div class="hero">
-  <h1>Speak it. <em>Get hired.</em></h1>
-  <p>Tell us about yourself in your own words. We'll turn it into a professional CV tailored to the role you want.</p>
+  <h1>The CV <em>tailored to the role.</em></h1>
+  <p>Tell us about yourself and the role you want. We'll write you a professional CV built specifically for that job.</p>
   <div class="tier-pills">
-    <div class="pill active" onclick="showPricing('spark')">Spark — Free (0 edits)</div>
-    <div class="pill" onclick="showPricing('ready')">Ready — ₦2,000 (2 edits)</div>
-    <div class="pill" onclick="showPricing('hired')">Hired — ₦5,000 (5 edits + cover letter)</div>
+    <div class="pill active">Spark — Free (0 edits)</div>
+    <div class="pill">Ready — ₦2,000 (2 edits)</div>
+    <div class="pill">Hired — ₦5,000 (5 edits + cover letter)</div>
   </div>
 </div>
 
 <div class="app">
 
-  <!-- STEP INDICATOR -->
   <div class="steps">
     <div class="step">
       <div class="step-dot active" id="dot-1">1</div>
@@ -264,7 +211,7 @@
     <div class="step-divider"></div>
     <div class="step">
       <div class="step-dot" id="dot-3">3</div>
-      <span class="step-label" id="lbl-3">Record voice</span>
+      <span class="step-label" id="lbl-3">Your background</span>
     </div>
     <div class="step-divider"></div>
     <div class="step">
@@ -273,7 +220,6 @@
     </div>
   </div>
 
-  <!-- STEP 1: TIER SELECTION -->
   <div id="step-1">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
 
@@ -283,7 +229,7 @@
         <div style="font-size:13px;color:var(--muted);margin:6px 0 14px;">Try before you pay</div>
         <ul style="list-style:none;font-size:13px;color:var(--ink-2);">
           <li style="padding:4px 0;">✓ Role-targeted CV</li>
-          <li style="padding:4px 0;">✓ AI-generated from voice</li>
+          <li style="padding:4px 0;">✓ AI-generated</li>
           <li style="padding:4px 0;color:var(--muted);">✗ No modifications</li>
           <li style="padding:4px 0;color:var(--muted);">✗ No cover letter</li>
         </ul>
@@ -298,7 +244,7 @@
         <div style="font-size:13px;color:var(--muted);margin:6px 0 14px;">For serious job seekers</div>
         <ul style="list-style:none;font-size:13px;color:var(--ink-2);">
           <li style="padding:4px 0;">✓ Role-targeted CV</li>
-          <li style="padding:4px 0;">✓ AI-generated from voice</li>
+          <li style="padding:4px 0;">✓ AI-generated</li>
           <li style="padding:4px 0;">✓ 2 modifications</li>
           <li style="padding:4px 0;color:var(--muted);">✗ No cover letter</li>
         </ul>
@@ -310,7 +256,7 @@
         <div style="font-size:13px;color:var(--muted);margin:6px 0 14px;">The complete package</div>
         <ul style="list-style:none;font-size:13px;color:var(--ink-2);">
           <li style="padding:4px 0;">✓ Role-targeted CV</li>
-          <li style="padding:4px 0;">✓ AI-generated from voice</li>
+          <li style="padding:4px 0;">✓ AI-generated</li>
           <li style="padding:4px 0;">✓ 5 modifications</li>
           <li style="padding:4px 0;">✓ Tailored cover letter</li>
         </ul>
@@ -318,7 +264,6 @@
     </div>
   </div>
 
-  <!-- STEP 2: ROLE INFO -->
   <div id="step-2" class="hidden">
     <div class="card">
       <div class="card-title">What role are you applying for?</div>
@@ -346,57 +291,42 @@
     </div>
   </div>
 
-  <!-- STEP 3: VOICE RECORD -->
   <div id="step-3" class="hidden">
     <div class="card">
       <div class="card-title">Tell us about yourself</div>
-      <div class="card-sub">Speak naturally for 1–3 minutes. Cover your education, work experience, skills, and anything relevant to the role. Don't worry about structure — that's our job.</div>
+      <div class="card-sub">Write naturally. Cover your education, work experience, skills, and anything relevant to the role. The more detail you give, the better your CV will be.</div>
 
-      <div class="record-area">
-        <button class="record-btn" id="record-btn" onclick="toggleRecord()">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#0A7C4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-            <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-            <line x1="12" y1="19" x2="12" y2="23"/>
-            <line x1="8" y1="23" x2="16" y2="23"/>
-          </svg>
-        </button>
-        <div class="timer hidden" id="timer">0:00</div>
-        <div class="record-status" id="record-status">Tap to start recording</div>
+      <div class="field">
+        <label>Your background</label>
+        <textarea id="background-input" rows="12" placeholder="e.g. I graduated from University of Lagos in 2023 with a second class upper in Business Administration. I did my NYSC at Cowrywise where I managed social media — grew Instagram from 5k to 12k followers. I'm skilled in Microsoft Office, Canva, and Google Analytics. I speak English and Yoruba fluently. I'm applying for this role because..."></textarea>
+        <div style="font-size:11px;color:var(--muted);margin-top:6px;">Aim for at least 5–6 sentences. There's no upper limit — more detail means a better CV.</div>
       </div>
 
-      <div class="transcript-box hidden" id="transcript-box">
-        <span id="transcript-text"></span>
-      </div>
-
-      <div class="flex-row mt-1" style="margin-top:1.25rem">
+      <div class="flex-row mt-1">
         <button class="btn btn-secondary" onclick="goStep(2)">Back</button>
-        <button class="btn btn-primary ml-auto hidden" id="generate-btn" onclick="generateCV()">
-          Generate my CV
-        </button>
+        <button class="btn btn-primary ml-auto" onclick="generateCV()">Generate my CV</button>
       </div>
     </div>
 
     <div class="card" style="background:var(--surface);">
-      <div style="font-size:13px;font-weight:500;color:var(--ink-2);margin-bottom:8px;">What to say</div>
+      <div style="font-size:13px;font-weight:500;color:var(--ink-2);margin-bottom:8px;">What to include</div>
       <ul style="font-size:13px;color:var(--muted);line-height:2;list-style:disc;padding-left:1.2rem;">
-        <li>Your name and highest qualification</li>
-        <li>Where you studied and when you graduated</li>
-        <li>Any work experience or internships</li>
+        <li>Your highest qualification and where you studied (with dates if possible)</li>
+        <li>Any work experience or internships (employer, role, what you did)</li>
         <li>Key skills relevant to the role</li>
-        <li>Achievements or projects you're proud of</li>
+        <li>Achievements or projects you're proud of (with numbers where you can)</li>
+        <li>Languages you speak</li>
         <li>Why you want this kind of role</li>
       </ul>
     </div>
   </div>
 
-  <!-- STEP 4: CV OUTPUT -->
   <div id="step-4" class="hidden">
 
     <div class="card hidden" id="loading-card">
       <div class="loading">
         <div class="spinner"></div>
-        <div class="loading-text" id="loading-msg">Analysing your voice recording...</div>
+        <div class="loading-text" id="loading-msg">Reading your background...</div>
       </div>
     </div>
 
@@ -469,7 +399,6 @@
 
 </div>
 
-<!-- PAYMENT MODAL -->
 <div class="modal-overlay" id="payment-modal">
   <div class="modal">
     <div class="modal-title">Complete payment</div>
@@ -481,30 +410,19 @@
       <button class="btn btn-primary btn-full" onclick="simulatePaystackPayment()">Pay with Paystack</button>
       <button class="btn btn-secondary btn-full" onclick="closePayment()">Cancel</button>
     </div>
-    <p class="paystack-note">VoiceCV · Powered by Paystack · Your card details are never stored by us</p>
+    <p class="paystack-note">HiredCV · Powered by Paystack · Your card details are never stored by us</p>
   </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
-const ANTHROPIC_API = "https://api.anthropic.com/v1/messages";
-
 let state = {
   tier: null, price: 0, maxMods: 0, hasCoverLetter: false,
   jobTitle: '', company: '', userName: '', userContact: '',
-  transcript: '', cvText: '', modsUsed: 0, paid: false,
+  background: '', cvText: '', modsUsed: 0, paid: false,
   coverLetterGenerated: false, pendingUpgrade: null
 };
-
-let mediaRecorder, audioChunks = [], recordingInterval, recordSeconds = 0;
-let isRecording = false;
-
-function showPricing(tier) {
-  document.querySelectorAll('.tier-pills .pill').forEach((p,i) => {
-    p.classList.toggle('active', ['spark','ready','hired'][i] === tier);
-  });
-}
 
 function selectTier(tier, price, mods, coverLetter) {
   state.tier = tier; state.price = price; state.maxMods = mods; state.hasCoverLetter = coverLetter;
@@ -559,10 +477,6 @@ function simulatePaystackPayment() {
 }
 
 function goStep(n) {
-  if (n === 2) {
-    const jt = document.getElementById('job-title');
-    if (n > 2 && !jt) return;
-  }
   if (n === 3) {
     const title = document.getElementById('job-title').value.trim();
     const name = document.getElementById('user-name').value.trim();
@@ -587,124 +501,49 @@ function goStep(n) {
   }
 }
 
-async function toggleRecord() {
-  if (!isRecording) {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      mediaRecorder = new MediaRecorder(stream);
-      audioChunks = [];
-      mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
-      mediaRecorder.onstop = processAudio;
-      mediaRecorder.start();
-      isRecording = true;
-      recordSeconds = 0;
-      document.getElementById('record-btn').classList.add('recording');
-      document.getElementById('record-status').textContent = 'Recording... tap to stop';
-      document.getElementById('record-status').classList.add('active');
-      document.getElementById('timer').classList.remove('hidden');
-      recordingInterval = setInterval(() => {
-        recordSeconds++;
-        const m = Math.floor(recordSeconds/60), s = recordSeconds%60;
-        document.getElementById('timer').textContent = m+':'+(s<10?'0':'')+s;
-      }, 1000);
-    } catch(e) {
-      showToast('Microphone access needed. Please allow it in your browser.');
-    }
-  } else {
-    mediaRecorder.stop();
-    mediaRecorder.stream.getTracks().forEach(t => t.stop());
-    isRecording = false;
-    clearInterval(recordingInterval);
-    document.getElementById('record-btn').classList.remove('recording');
-    document.getElementById('record-status').textContent = 'Recording complete. Review below.';
-    document.getElementById('record-status').classList.remove('active');
-  }
-}
-
-function processAudio() {
-  const mockTranscripts = [
-    `My name is ${state.userName || 'Adaeze Nwosu'}. I graduated from University of Lagos in 2023 with a second class upper in Business Administration. During my final year I completed an internship at GTBank in their digital banking team where I helped with customer onboarding and data analysis using Excel and PowerPoint. I also did my NYSC at a fintech startup called Cowrywise where I worked in the marketing team managing their social media pages and writing content. I grew their Instagram from 5,000 to 12,000 followers in ten months. I'm skilled in Microsoft Office, Canva, Google Analytics, and I speak English and Yoruba fluently. I'm applying for this role because I'm passionate about digital marketing and I believe my combination of finance knowledge and creative skills makes me a strong candidate.`
-  ];
-  const t = mockTranscripts[0].replace('Adaeze Nwosu', state.userName || 'Adaeze Nwosu');
-  state.transcript = t;
-  document.getElementById('transcript-box').classList.remove('hidden');
-  document.getElementById('transcript-text').textContent = '"' + t.substring(0,120) + '..."';
-  document.getElementById('generate-btn').classList.remove('hidden');
+async function callApi(action, data) {
+  const res = await fetch('/api/generate', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ action, data })
+  });
+  return res.json();
 }
 
 async function generateCV() {
+  const bg = document.getElementById('background-input').value.trim();
+  if (bg.length < 80) {
+    showToast('Please write a few sentences about yourself (at least 80 characters).');
+    return;
+  }
+  state.background = bg;
+
   goStep(4);
-  const msgs = ['Analysing your voice recording...','Tailoring to '+state.jobTitle+'...','Structuring your experience...','Polishing your CV...'];
+  const msgs = ['Reading your background...', 'Tailoring to ' + state.jobTitle + '...', 'Structuring your experience...', 'Polishing your CV...'];
   let mi = 0;
-  const intv = setInterval(() => { if(mi<msgs.length-1) document.getElementById('loading-msg').textContent = msgs[++mi]; }, 1200);
-
-  const systemPrompt = `You are a professional CV writer specialising in Nigerian job markets. Generate a complete, well-structured CV in HTML format (using only inline styles and basic HTML tags like div, p, strong, ul, li). The CV should be tailored specifically to the role mentioned. Use clean, professional language. Return ONLY the HTML content for the CV body — no explanation, no markdown, no outer tags.`;
-
-  const userPrompt = `Generate a professional CV for the following person:
-Name: ${state.userName}
-Contact: ${state.userContact}
-Applying for: ${state.jobTitle}${state.company ? ' at ' + state.company : ''}
-Voice transcript: "${state.transcript}"
-
-Structure the CV with these sections:
-1. Professional summary (3-4 sentences, tailored to ${state.jobTitle})
-2. Work Experience (extract from transcript)
-3. Education
-4. Skills (relevant to ${state.jobTitle})
-5. Additional Information
-
-Make it professional, concise, and tailored. Return clean HTML only.`;
+  const intv = setInterval(() => { if (mi < msgs.length - 1) document.getElementById('loading-msg').textContent = msgs[++mi]; }, 1500);
 
   try {
-    const res = await fetch(ANTHROPIC_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: userPrompt }],
-        system: systemPrompt
-      })
+    const data = await callApi('generate', {
+      userName: state.userName,
+      userContact: state.userContact,
+      jobTitle: state.jobTitle,
+      company: state.company,
+      background: state.background
     });
-    const data = await res.json();
     clearInterval(intv);
-    const html = data.content?.[0]?.text || getFallbackCV();
-    state.cvText = html;
-    renderCV(html);
-  } catch(e) {
-    clearInterval(intv);
-    state.cvText = getFallbackCV();
+    if (!data.ok) {
+      showToast('Could not generate CV. ' + (data.error || 'Please try again.'));
+      goStep(3);
+      return;
+    }
+    state.cvText = data.content;
     renderCV(state.cvText);
+  } catch (e) {
+    clearInterval(intv);
+    showToast('Network error. Please check your connection and try again.');
+    goStep(3);
   }
-}
-
-function getFallbackCV() {
-  return `<div style="font-family:'DM Sans',sans-serif">
-  <div style="font-size:22px;font-weight:700;font-family:'Syne',sans-serif;color:#0F1A14">${state.userName || 'Your Name'}</div>
-  <div style="font-size:13px;color:#0A7C4E;font-weight:500;margin-bottom:6px;">${state.jobTitle} Candidate</div>
-  <div style="font-size:12px;color:#6B7C74;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #D4E0DA">${state.userContact || 'contact@email.com'}</div>
-  <div style="margin-bottom:14px">
-    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0A7C4E;border-bottom:1px solid #E6F5EE;padding-bottom:4px;margin-bottom:8px">Professional Summary</div>
-    <p style="font-size:13px;color:#2D3F36;line-height:1.7">A motivated and results-driven professional seeking a ${state.jobTitle} position${state.company ? ' at ' + state.company : ''}. Demonstrated ability in key relevant areas with strong communication and analytical skills developed through academic and professional experience.</p>
-  </div>
-  <div style="margin-bottom:14px">
-    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0A7C4E;border-bottom:1px solid #E6F5EE;padding-bottom:4px;margin-bottom:8px">Work Experience</div>
-    <div style="font-size:13.5px;font-weight:500;color:#0F1A14">NYSC Corp Member</div>
-    <div style="font-size:12px;color:#6B7C74;margin-bottom:4px">National Youth Service Corps · 2023 – 2024</div>
-    <p style="font-size:13px;color:#2D3F36">Completed national service with distinction, contributing to assigned organisation's objectives and demonstrating professional conduct throughout the programme.</p>
-  </div>
-  <div style="margin-bottom:14px">
-    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0A7C4E;border-bottom:1px solid #E6F5EE;padding-bottom:4px;margin-bottom:8px">Education</div>
-    <div style="font-size:13.5px;font-weight:500;color:#0F1A14">Bachelor of Science</div>
-    <div style="font-size:12px;color:#6B7C74">University · 2019 – 2023</div>
-  </div>
-  <div>
-    <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0A7C4E;border-bottom:1px solid #E6F5EE;padding-bottom:4px;margin-bottom:8px">Skills</div>
-    <div style="display:flex;flex-wrap:wrap;gap:6px">
-      ${['Communication','Microsoft Office','Problem Solving','Teamwork','Analytical Thinking'].map(s=>`<span style="font-size:11px;background:#E6F5EE;color:#064D30;padding:3px 10px;border-radius:20px;font-weight:500">${s}</span>`).join('')}
-    </div>
-  </div>
-</div>`;
 }
 
 function renderCV(html) {
@@ -714,14 +553,14 @@ function renderCV(html) {
 
   const modText = state.maxMods === 0
     ? 'This is a preview. Upgrade to Ready (₦2,000) to make modifications.'
-    : `You have ${state.maxMods} modification${state.maxMods>1?'s':''} available on the ${capitalize(state.tier)} plan.`;
+    : 'You have ' + state.maxMods + ' modification' + (state.maxMods > 1 ? 's' : '') + ' available on the ' + capitalize(state.tier) + ' plan.';
   document.getElementById('mod-info-text').textContent = modText;
 
   if (state.maxMods === 0) {
     document.getElementById('modify-btn').classList.add('hidden');
   }
 
-  if (state.hasCoverLetter) generateCoverLetter();
+  if (state.hasCoverLetter && !state.coverLetterGenerated) generateCoverLetter();
   document.getElementById('upsell-role-name').textContent = state.jobTitle;
   updateModCounter();
 }
@@ -740,7 +579,7 @@ function updateModCounter() {
   const remaining = state.maxMods - state.modsUsed;
   document.getElementById('mod-label-text').textContent = remaining === 0
     ? 'No modifications remaining'
-    : `${remaining} modification${remaining>1?'s':''} remaining`;
+    : remaining + ' modification' + (remaining > 1 ? 's' : '') + ' remaining';
 }
 
 function showModifyBox() {
@@ -770,30 +609,24 @@ async function applyModification() {
   document.getElementById('cv-section').classList.add('hidden');
   document.getElementById('loading-msg').textContent = 'Applying your changes...';
 
-  const systemPrompt = `You are a professional CV editor. The user will give you a CV in HTML and a requested change. Apply the change and return the updated CV HTML only. No explanation, no markdown.`;
-  const userPrompt = `Here is the current CV HTML:\n${state.cvText}\n\nRequested change: "${req}"\n\nReturn the updated CV HTML only.`;
-
   try {
-    const res = await fetch(ANTHROPIC_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: userPrompt }],
-        system: systemPrompt
-      })
-    });
-    const data = await res.json();
-    const updated = data.content?.[0]?.text || state.cvText;
-    state.cvText = updated;
+    const data = await callApi('modify', { currentCV: state.cvText, request: req });
+    if (!data.ok) {
+      showToast('Could not apply change. ' + (data.error || 'Please try again.'));
+      state.modsUsed--;
+      updateModCounter();
+      document.getElementById('loading-card').classList.add('hidden');
+      document.getElementById('cv-section').classList.remove('hidden');
+      return;
+    }
+    state.cvText = data.content;
     document.getElementById('modify-input').value = '';
-    renderCV(updated);
+    renderCV(state.cvText);
     showToast('CV updated successfully.');
-  } catch(e) {
+  } catch (e) {
     document.getElementById('loading-card').classList.add('hidden');
     document.getElementById('cv-section').classList.remove('hidden');
-    showToast('Could not apply change. Please try again.');
+    showToast('Network error. Please try again.');
     state.modsUsed--;
     updateModCounter();
   }
@@ -813,36 +646,35 @@ async function generateCoverLetter() {
   document.getElementById('cover-letter-sub').textContent = 'Generating your cover letter...';
   document.getElementById('cover-letter-output').innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:13px;">Writing your cover letter...</div>';
 
-  const systemPrompt = `You are a professional cover letter writer for Nigerian job seekers. Write a compelling, genuine cover letter. Return plain text only — no HTML, no markdown.`;
-  const userPrompt = `Write a cover letter for ${state.userName} applying for ${state.jobTitle}${state.company?' at '+state.company:''}. Based on: "${state.transcript}". Keep it to 3 paragraphs. Professional but warm tone.`;
-
   try {
-    const res = await fetch(ANTHROPIC_API, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        messages: [{ role: 'user', content: userPrompt }],
-        system: systemPrompt
-      })
+    const data = await callApi('cover-letter', {
+      userName: state.userName,
+      jobTitle: state.jobTitle,
+      company: state.company,
+      background: state.background
     });
-    const data = await res.json();
-    const text = data.content?.[0]?.text || 'Dear Hiring Manager,\n\nI am writing to express my interest in the '+state.jobTitle+' position...\n\nSincerely,\n'+state.userName;
+    if (!data.ok) {
+      document.getElementById('cover-letter-output').innerHTML = '<p style="color:var(--muted);font-size:13px">Could not generate cover letter. ' + (data.error || 'Please try again.') + '</p>';
+      return;
+    }
     state.coverLetterGenerated = true;
     document.getElementById('cover-letter-sub').textContent = 'Tailored for ' + state.jobTitle + (state.company ? ' at ' + state.company : '');
-    document.getElementById('cover-letter-output').innerHTML = text.split('\n').filter(l=>l.trim()).map(l=>`<p style="margin-bottom:10px">${l}</p>`).join('');
-  } catch(e) {
-    document.getElementById('cover-letter-output').innerHTML = '<p style="color:var(--muted);font-size:13px">Could not generate cover letter. Please try again.</p>';
+    document.getElementById('cover-letter-output').innerHTML = data.content.split('\n').filter(l => l.trim()).map(l => '<p style="margin-bottom:10px">' + escapeHtml(l) + '</p>').join('');
+  } catch (e) {
+    document.getElementById('cover-letter-output').innerHTML = '<p style="color:var(--muted);font-size:13px">Network error. Please try again.</p>';
   }
 }
 
+function escapeHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function downloadCV() {
-  const html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CV — ${state.userName}</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"><style>body{font-family:'DM Sans',sans-serif;max-width:700px;margin:40px auto;padding:40px;color:#0F1A14;}</style></head><body>${state.cvText}</body></html>`;
+  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CV — ' + state.userName + '</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"><style>body{font-family:\'DM Sans\',sans-serif;max-width:700px;margin:40px auto;padding:40px;color:#0F1A14;}</style></head><body>' + state.cvText + '</body></html>';
   const blob = new Blob([html], { type: 'text/html' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = (state.userName || 'CV').replace(/\s+/g,'-') + '-CV.html';
+  a.download = (state.userName || 'CV').replace(/\s+/g, '-') + '-CV.html';
   a.click();
   showToast('CV downloaded!');
 }
@@ -852,22 +684,18 @@ function downloadCoverLetter() {
   const blob = new Blob([text], { type: 'text/plain' });
   const a = document.createElement('a');
   a.href = URL.createObjectURL(blob);
-  a.download = (state.userName || 'Cover-Letter').replace(/\s+/g,'-') + '-Cover-Letter.txt';
+  a.download = (state.userName || 'Cover-Letter').replace(/\s+/g, '-') + '-Cover-Letter.txt';
   a.click();
   showToast('Cover letter downloaded!');
 }
 
 function startOver() {
-  state = { tier:null,price:0,maxMods:0,hasCoverLetter:false,jobTitle:'',company:'',userName:'',userContact:'',transcript:'',cvText:'',modsUsed:0,paid:false,coverLetterGenerated:false,pendingUpgrade:null };
-  document.getElementById('transcript-box').classList.add('hidden');
-  document.getElementById('generate-btn').classList.add('hidden');
-  document.getElementById('timer').classList.add('hidden');
-  document.getElementById('record-status').textContent = 'Tap to start recording';
+  state = { tier: null, price: 0, maxMods: 0, hasCoverLetter: false, jobTitle: '', company: '', userName: '', userContact: '', background: '', cvText: '', modsUsed: 0, paid: false, coverLetterGenerated: false, pendingUpgrade: null };
   document.getElementById('modify-box').classList.add('hidden');
   document.getElementById('upsell-section').classList.add('hidden');
   document.getElementById('cover-letter-section').classList.add('hidden');
-  ['job-title','company','user-name','user-contact','modify-input'].forEach(id => {
-    const el = document.getElementById(id); if(el) el.value='';
+  ['job-title', 'company', 'user-name', 'user-contact', 'modify-input', 'background-input'].forEach(id => {
+    const el = document.getElementById(id); if (el) el.value = '';
   });
   goStep(1);
 }
@@ -876,10 +704,10 @@ function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
   t.classList.add('show');
-  setTimeout(() => t.classList.remove('show'), 2800);
+  setTimeout(() => t.classList.remove('show'), 3500);
 }
 
-function capitalize(s) { return s ? s.charAt(0).toUpperCase()+s.slice(1) : ''; }
+function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
 </script>
 </body>
 </html>
