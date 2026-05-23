@@ -6,6 +6,7 @@
 <title>HiredCV — A CV Tailored to the Role</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 <style>
   :root {
     --green: #0A7C4E;
@@ -190,9 +191,9 @@
   <h1>The CV <em>tailored to the role.</em></h1>
   <p>Tell us about yourself and the role you want. We'll write you a professional CV built specifically for that job.</p>
   <div class="tier-pills">
-    <div class="pill active">Spark — Free (0 edits)</div>
-    <div class="pill">Ready — ₦2,000 (2 edits)</div>
-    <div class="pill">Hired — ₦5,000 (5 edits + cover letter)</div>
+    <div class="pill active">Spark — Free</div>
+    <div class="pill" style="opacity:0.55;cursor:not-allowed;">Ready — ₦2,000 · Coming soon</div>
+    <div class="pill" style="opacity:0.55;cursor:not-allowed;">Hired — ₦5,000 · Coming soon</div>
   </div>
 </div>
 
@@ -223,7 +224,7 @@
   <div id="step-1">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;">
 
-      <div class="card" style="cursor:pointer;border-color:var(--border)" onclick="selectTier('spark',0,0,false)" id="tier-spark">
+      <div class="card" style="cursor:pointer;border:2px solid var(--green-mid)" onclick="selectTier('spark')" id="tier-spark">
         <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;">Spark</div>
         <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);">Free</div>
         <div style="font-size:13px;color:var(--muted);margin:6px 0 14px;">Try before you pay</div>
@@ -235,28 +236,25 @@
         </ul>
       </div>
 
-      <div class="card" style="cursor:pointer;border:2px solid var(--green-mid)" onclick="selectTier('ready',2000,2,false)" id="tier-ready">
-        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);">Ready</div>
-          <div style="font-size:11px;background:var(--green-light);color:var(--green);padding:2px 8px;border-radius:20px;font-weight:600;">Popular</div>
-        </div>
+      <div class="card" style="cursor:not-allowed;border-color:var(--border);opacity:0.6;position:relative" id="tier-ready">
+        <div style="position:absolute;top:12px;right:12px;font-size:10px;background:var(--surface);color:var(--muted);padding:3px 8px;border-radius:20px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;">Coming soon</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--green);margin-bottom:8px;">Ready</div>
         <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);">₦2,000</div>
         <div style="font-size:13px;color:var(--muted);margin:6px 0 14px;">For serious job seekers</div>
         <ul style="list-style:none;font-size:13px;color:var(--ink-2);">
           <li style="padding:4px 0;">✓ Role-targeted CV</li>
-          <li style="padding:4px 0;">✓ AI-generated</li>
           <li style="padding:4px 0;">✓ 2 modifications</li>
           <li style="padding:4px 0;color:var(--muted);">✗ No cover letter</li>
         </ul>
       </div>
 
-      <div class="card" style="cursor:pointer;border-color:var(--border)" onclick="selectTier('hired',5000,5,true)" id="tier-hired">
+      <div class="card" style="cursor:not-allowed;border-color:var(--border);opacity:0.6;position:relative" id="tier-hired">
+        <div style="position:absolute;top:12px;right:12px;font-size:10px;background:var(--surface);color:var(--muted);padding:3px 8px;border-radius:20px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;">Coming soon</div>
         <div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Hired</div>
         <div style="font-family:'Syne',sans-serif;font-size:1.6rem;font-weight:800;color:var(--ink);">₦5,000</div>
         <div style="font-size:13px;color:var(--muted);margin:6px 0 14px;">The complete package</div>
         <ul style="list-style:none;font-size:13px;color:var(--ink-2);">
           <li style="padding:4px 0;">✓ Role-targeted CV</li>
-          <li style="padding:4px 0;">✓ AI-generated</li>
           <li style="padding:4px 0;">✓ 5 modifications</li>
           <li style="padding:4px 0;">✓ Tailored cover letter</li>
         </ul>
@@ -333,147 +331,42 @@
     <div id="cv-section" class="hidden">
 
       <div class="card" style="background:var(--green-light);border-color:var(--green-mid);">
-        <div style="font-size:14px;font-weight:500;color:var(--green-dark);">Your CV is ready. Is everything looking good?</div>
-        <div style="font-size:13px;color:var(--green);margin-top:4px;" id="mod-info-text"></div>
-      </div>
-
-      <div class="mod-counter hidden" id="mod-counter">
-        <div class="mod-dots" id="mod-dots"></div>
-        <div class="mod-label" id="mod-label-text"></div>
+        <div style="font-size:14px;font-weight:500;color:var(--green-dark);">Your CV is ready. Download it below.</div>
+        <div style="font-size:12px;color:var(--green);margin-top:4px;">Want to edit it? The Ready tier (₦2,000) is coming soon — drop your email below to be the first to know.</div>
       </div>
 
       <div class="cv-output" id="cv-output"></div>
 
       <div style="margin-top:1.25rem;display:flex;flex-direction:column;gap:10px;" id="cv-actions">
-        <div class="flex-row">
-          <button class="btn btn-primary" onclick="downloadCV()">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            Download CV
-          </button>
-          <button class="btn btn-secondary ml-auto" id="modify-btn" onclick="showModifyBox()">Request a change</button>
-        </div>
+        <button class="btn btn-primary btn-full" onclick="downloadCV()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download as PDF
+        </button>
+        <button class="btn btn-secondary btn-full" onclick="shareWhatsApp()">
+          Share HiredCV with a friend on WhatsApp
+        </button>
         <button class="btn btn-secondary btn-full" onclick="startOver()">Start a new CV</button>
       </div>
 
-      <div id="modify-box" class="hidden" style="margin-top:1rem;">
-        <div class="card">
-          <div class="card-title">What would you like changed?</div>
-          <div class="card-sub">Describe the change clearly. e.g. "Make my summary sound more confident" or "Add my NYSC experience under work history"</div>
-          <div class="field">
-            <textarea id="modify-input" placeholder="Type your requested change here..."></textarea>
-          </div>
-          <div class="flex-row">
-            <button class="btn btn-secondary" onclick="hideModifyBox()">Cancel</button>
-            <button class="btn btn-primary ml-auto" onclick="applyModification()">Apply change</button>
-          </div>
-        </div>
-      </div>
-
-      <div id="upsell-section" class="hidden" style="margin-top:1rem;">
-        <div class="upsell-card">
-          <div class="upsell-badge">Upgrade to Hired</div>
-          <div class="upsell-title">You've used all your modifications</div>
-          <p style="font-size:13px;color:var(--muted);margin-bottom:0.5rem;">Upgrade to get 3 more edits plus a tailored cover letter for this exact role.</p>
-          <div class="upsell-price">₦5,000 <span style="font-size:13px;color:var(--muted);font-weight:400;">total</span></div>
-          <ul class="upsell-features">
-            <li>3 additional modifications</li>
-            <li>Cover letter tailored to <span id="upsell-role-name" style="font-weight:600;color:var(--ink)"></span></li>
-            <li>Priority processing</li>
-          </ul>
-          <button class="btn btn-primary btn-full" onclick="openPayment('hired-upgrade')">Upgrade now — ₦5,000</button>
-          <p style="font-size:11px;color:var(--muted);margin-top:10px;">Secure payment via Paystack</p>
-        </div>
-      </div>
-
-      <div id="cover-letter-section" class="hidden" style="margin-top:1.25rem;">
-        <div class="card">
-          <div class="card-title">Your cover letter</div>
-          <div class="card-sub" id="cover-letter-sub"></div>
-          <div id="cover-letter-output" style="font-size:13.5px;line-height:1.8;color:var(--ink-2);"></div>
-          <button class="btn btn-secondary mt-1" onclick="downloadCoverLetter()">Download cover letter</button>
-        </div>
-      </div>
-
     </div>
   </div>
 
-</div>
-
-<div class="modal-overlay" id="payment-modal">
-  <div class="modal">
-    <div class="modal-title">Complete payment</div>
-    <div class="modal-sub">You'll be redirected to Paystack to pay securely.</div>
-    <div class="payment-row"><span>Plan</span><span id="pay-plan-name" style="font-weight:500;"></span></div>
-    <div class="payment-row"><span>Includes</span><span id="pay-includes" style="color:var(--muted);"></span></div>
-    <div class="payment-row"><span>Amount</span><span id="pay-amount" style="color:var(--green);"></span></div>
-    <div style="margin-top:1.25rem;display:flex;flex-direction:column;gap:8px;">
-      <button class="btn btn-primary btn-full" onclick="simulatePaystackPayment()">Pay with Paystack</button>
-      <button class="btn btn-secondary btn-full" onclick="closePayment()">Cancel</button>
-    </div>
-    <p class="paystack-note">HiredCV · Powered by Paystack · Your card details are never stored by us</p>
-  </div>
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 let state = {
-  tier: null, price: 0, maxMods: 0, hasCoverLetter: false,
   jobTitle: '', company: '', userName: '', userContact: '',
-  background: '', cvText: '', modsUsed: 0, paid: false,
-  coverLetterGenerated: false, pendingUpgrade: null
+  background: '', cvText: ''
 };
 
-function selectTier(tier, price, mods, coverLetter) {
-  state.tier = tier; state.price = price; state.maxMods = mods; state.hasCoverLetter = coverLetter;
-  ['spark','ready','hired'].forEach(t => {
-    const el = document.getElementById('tier-'+t);
-    el.style.borderWidth = t === tier ? '2px' : '1px';
-    el.style.borderColor = t === tier ? 'var(--green-mid)' : 'var(--border)';
-  });
-  if (price > 0) {
-    openPayment(tier);
-  } else {
-    goStep(2);
+function selectTier(tier) {
+  if (tier !== 'spark') {
+    showToast('That tier is coming soon. Try the free Spark tier for now.');
+    return;
   }
-}
-
-function openPayment(tier) {
-  const plans = {
-    spark: { name: 'Spark', includes: '1 CV, no modifications', amount: 'Free' },
-    ready: { name: 'Ready', includes: '1 CV + 2 modifications', amount: '₦2,000' },
-    hired: { name: 'Hired', includes: '1 CV + 5 modifications + cover letter', amount: '₦5,000' },
-    'hired-upgrade': { name: 'Hired (upgrade)', includes: '3 more edits + cover letter', amount: '₦5,000' }
-  };
-  const p = plans[tier] || plans.ready;
-  document.getElementById('pay-plan-name').textContent = p.name;
-  document.getElementById('pay-includes').textContent = p.includes;
-  document.getElementById('pay-amount').textContent = p.amount;
-  state.pendingUpgrade = tier;
-  document.getElementById('payment-modal').classList.add('open');
-}
-
-function closePayment() {
-  document.getElementById('payment-modal').classList.remove('open');
-  state.pendingUpgrade = null;
-}
-
-function simulatePaystackPayment() {
-  closePayment();
-  if (state.pendingUpgrade === 'hired-upgrade') {
-    state.maxMods = state.modsUsed + 3;
-    state.hasCoverLetter = true;
-    state.paid = true;
-    document.getElementById('upsell-section').classList.add('hidden');
-    document.getElementById('modify-btn').classList.remove('hidden');
-    updateModCounter();
-    if (!state.coverLetterGenerated) generateCoverLetter();
-    showToast('Upgraded to Hired! 3 more edits + cover letter unlocked.');
-  } else {
-    state.paid = true;
-    showToast('Payment confirmed! Let\'s build your CV.');
-    goStep(2);
-  }
+  goStep(2);
 }
 
 function goStep(n) {
@@ -550,151 +443,35 @@ function renderCV(html) {
   document.getElementById('loading-card').classList.add('hidden');
   document.getElementById('cv-section').classList.remove('hidden');
   document.getElementById('cv-output').innerHTML = html;
-
-  const modText = state.maxMods === 0
-    ? 'This is a preview. Upgrade to Ready (₦2,000) to make modifications.'
-    : 'You have ' + state.maxMods + ' modification' + (state.maxMods > 1 ? 's' : '') + ' available on the ' + capitalize(state.tier) + ' plan.';
-  document.getElementById('mod-info-text').textContent = modText;
-
-  if (state.maxMods === 0) {
-    document.getElementById('modify-btn').classList.add('hidden');
-  }
-
-  if (state.hasCoverLetter && !state.coverLetterGenerated) generateCoverLetter();
-  document.getElementById('upsell-role-name').textContent = state.jobTitle;
-  updateModCounter();
-}
-
-function updateModCounter() {
-  const counter = document.getElementById('mod-counter');
-  if (state.maxMods === 0) { counter.classList.add('hidden'); return; }
-  counter.classList.remove('hidden');
-  const dots = document.getElementById('mod-dots');
-  dots.innerHTML = '';
-  for (let i = 0; i < state.maxMods; i++) {
-    const d = document.createElement('div');
-    d.className = 'mod-dot' + (i < state.modsUsed ? ' used' : '');
-    dots.appendChild(d);
-  }
-  const remaining = state.maxMods - state.modsUsed;
-  document.getElementById('mod-label-text').textContent = remaining === 0
-    ? 'No modifications remaining'
-    : remaining + ' modification' + (remaining > 1 ? 's' : '') + ' remaining';
-}
-
-function showModifyBox() {
-  if (state.modsUsed >= state.maxMods && state.maxMods > 0) {
-    document.getElementById('upsell-section').classList.remove('hidden');
-    document.getElementById('modify-btn').classList.add('hidden');
-    return;
-  }
-  document.getElementById('modify-box').classList.remove('hidden');
-  document.getElementById('modify-btn').classList.add('hidden');
-}
-
-function hideModifyBox() {
-  document.getElementById('modify-box').classList.add('hidden');
-  document.getElementById('modify-btn').classList.remove('hidden');
-}
-
-async function applyModification() {
-  const req = document.getElementById('modify-input').value.trim();
-  if (!req) { showToast('Please describe what you\'d like changed.'); return; }
-
-  state.modsUsed++;
-  updateModCounter();
-  hideModifyBox();
-
-  document.getElementById('loading-card').classList.remove('hidden');
-  document.getElementById('cv-section').classList.add('hidden');
-  document.getElementById('loading-msg').textContent = 'Applying your changes...';
-
-  try {
-    const data = await callApi('modify', { currentCV: state.cvText, request: req });
-    if (!data.ok) {
-      showToast('Could not apply change. ' + (data.error || 'Please try again.'));
-      state.modsUsed--;
-      updateModCounter();
-      document.getElementById('loading-card').classList.add('hidden');
-      document.getElementById('cv-section').classList.remove('hidden');
-      return;
-    }
-    state.cvText = data.content;
-    document.getElementById('modify-input').value = '';
-    renderCV(state.cvText);
-    showToast('CV updated successfully.');
-  } catch (e) {
-    document.getElementById('loading-card').classList.add('hidden');
-    document.getElementById('cv-section').classList.remove('hidden');
-    showToast('Network error. Please try again.');
-    state.modsUsed--;
-    updateModCounter();
-  }
-
-  if (state.modsUsed >= state.maxMods && state.maxMods > 0) {
-    document.getElementById('modify-btn').classList.add('hidden');
-    setTimeout(() => {
-      document.getElementById('upsell-section').classList.remove('hidden');
-    }, 600);
-  }
-}
-
-async function generateCoverLetter() {
-  if (state.coverLetterGenerated) return;
-  const section = document.getElementById('cover-letter-section');
-  section.classList.remove('hidden');
-  document.getElementById('cover-letter-sub').textContent = 'Generating your cover letter...';
-  document.getElementById('cover-letter-output').innerHTML = '<div style="text-align:center;padding:1rem;color:var(--muted);font-size:13px;">Writing your cover letter...</div>';
-
-  try {
-    const data = await callApi('cover-letter', {
-      userName: state.userName,
-      jobTitle: state.jobTitle,
-      company: state.company,
-      background: state.background
-    });
-    if (!data.ok) {
-      document.getElementById('cover-letter-output').innerHTML = '<p style="color:var(--muted);font-size:13px">Could not generate cover letter. ' + (data.error || 'Please try again.') + '</p>';
-      return;
-    }
-    state.coverLetterGenerated = true;
-    document.getElementById('cover-letter-sub').textContent = 'Tailored for ' + state.jobTitle + (state.company ? ' at ' + state.company : '');
-    document.getElementById('cover-letter-output').innerHTML = data.content.split('\n').filter(l => l.trim()).map(l => '<p style="margin-bottom:10px">' + escapeHtml(l) + '</p>').join('');
-  } catch (e) {
-    document.getElementById('cover-letter-output').innerHTML = '<p style="color:var(--muted);font-size:13px">Network error. Please try again.</p>';
-  }
-}
-
-function escapeHtml(s) {
-  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 
 function downloadCV() {
-  const html = '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>CV — ' + state.userName + '</title><link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"><style>body{font-family:\'DM Sans\',sans-serif;max-width:700px;margin:40px auto;padding:40px;color:#0F1A14;}</style></head><body>' + state.cvText + '</body></html>';
-  const blob = new Blob([html], { type: 'text/html' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = (state.userName || 'CV').replace(/\s+/g, '-') + '-CV.html';
-  a.click();
-  showToast('CV downloaded!');
+  const wrapper = document.createElement('div');
+  wrapper.style.cssText = 'padding:20px;font-family:Arial,Helvetica,sans-serif;color:#000;background:#fff;max-width:700px;';
+  wrapper.innerHTML = state.cvText;
+  const filename = (state.userName || 'CV').replace(/\s+/g, '-') + '-CV.pdf';
+  showToast('Preparing PDF...');
+  html2pdf().set({
+    margin: 12,
+    filename: filename,
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  }).from(wrapper).save().then(() => {
+    showToast('PDF downloaded!');
+  }).catch(() => {
+    showToast('Could not generate PDF. Try again.');
+  });
 }
 
-function downloadCoverLetter() {
-  const text = document.getElementById('cover-letter-output').innerText;
-  const blob = new Blob([text], { type: 'text/plain' });
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(blob);
-  a.download = (state.userName || 'Cover-Letter').replace(/\s+/g, '-') + '-Cover-Letter.txt';
-  a.click();
-  showToast('Cover letter downloaded!');
+function shareWhatsApp() {
+  const text = encodeURIComponent('I just made my CV with HiredCV in 60 seconds — it\'s tailored to the exact role I\'m applying for. Try it: ' + window.location.origin);
+  window.open('https://wa.me/?text=' + text, '_blank');
 }
 
 function startOver() {
-  state = { tier: null, price: 0, maxMods: 0, hasCoverLetter: false, jobTitle: '', company: '', userName: '', userContact: '', background: '', cvText: '', modsUsed: 0, paid: false, coverLetterGenerated: false, pendingUpgrade: null };
-  document.getElementById('modify-box').classList.add('hidden');
-  document.getElementById('upsell-section').classList.add('hidden');
-  document.getElementById('cover-letter-section').classList.add('hidden');
-  ['job-title', 'company', 'user-name', 'user-contact', 'modify-input', 'background-input'].forEach(id => {
+  state = { jobTitle: '', company: '', userName: '', userContact: '', background: '', cvText: '' };
+  ['job-title', 'company', 'user-name', 'user-contact', 'background-input'].forEach(id => {
     const el = document.getElementById(id); if (el) el.value = '';
   });
   goStep(1);

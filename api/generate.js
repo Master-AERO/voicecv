@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       return res.status(400).json({ ok: false, error: 'Missing required fields' });
     }
     systemPrompt =
-      'You are a professional CV writer for the Nigerian job market. Generate a complete, well-structured CV in HTML using only inline styles and basic tags (div, p, strong, ul, li, span). The CV must be tailored specifically to the role the candidate is applying for. Use clean, professional language. Only use information the candidate provides — do not fabricate experience, dates, or qualifications. If a section has no information, omit it entirely. Return ONLY the HTML body content for the CV — no explanation, no markdown fences, no outer html/body tags.';
+      'You are a professional CV writer for the Nigerian job market. Generate a complete, well-structured CV in HTML using only inline styles and basic tags (div, p, strong, ul, li, span). The CV must be tailored specifically to the role the candidate is applying for. Use clean, professional language. Only use information the candidate provides — do not fabricate experience, dates, or qualifications. If a section has no information, omit it entirely. Use ONLY black text (#000000) on a white background. Do not use coloured text, coloured backgrounds, or coloured borders anywhere. Use bold (<strong>) and uppercase for section headings and emphasis instead of colour. Return ONLY the HTML body content for the CV — no explanation, no markdown fences, no outer html/body tags.';
     userPrompt = `Generate a professional CV for the following person:
 Name: ${userName}
 Contact: ${userContact || '(none provided)'}
@@ -41,7 +41,7 @@ Structure the CV with these sections (omit any that have no information):
 4. Skills (relevant to ${jobTitle})
 5. Additional Information
 
-Use a clean single-column layout. Section headings should use #0A7C4E (green) and inline styles only. Return clean HTML only.`;
+Use a clean single-column layout. Wrap the entire CV in a single outer <div> with inline style "font-family: Arial, Helvetica, sans-serif; color: #000; line-height: 1.5; font-size: 12pt;". All text must be black on white — no colours of any kind. Section headings should be bold, uppercase, slightly larger (font-size: 13pt), and separated from body text by a thin black underline (border-bottom: 1px solid #000; padding-bottom: 2px; margin-bottom: 8px). Return clean HTML only.`;
     maxTokens = 2000;
   } else if (action === 'modify') {
     const { currentCV, request: changeReq } = data || {};
